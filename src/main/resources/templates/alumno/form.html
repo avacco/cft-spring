@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Alumno form</title>
+</head>
+<body>
+	<h1>ALUMNO FORM</h1>
+	
+	<!-- Obtiene del controlador en /alumno, el objeto enviado desde la clase  -->
+	<form th:action="@{/alumno/procesar}" th:object="${alumno}" method="POST">
+		<p>
+			Nombre: <input type="text" th:field="*{nombre}" />
+			<!-- Tira un error de mensaje variable segun el idioma del sistema, relacionado al tipo de error  -->
+			<span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" style="color: red;"></span>
+		</p>
+		<p>
+			Fecha Nacimiento: <input type="date" th:field="*{fechaNacimiento}" />
+			<span th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}" style="color: red;"></span>
+		</p>
+		Carrera:
+		<select th:field="*{carrera}">
+			<option th:each="carrera : ${carreras}" th:value="${carrera.id}" th:text="${carrera.nombre}" />
+		</select>
+		
+		<!-- a la hora de editar, se guarda el id en este input escondido, a cuando se haga POST, si el id es distinto de 0 (que siempre sera 0 al crear un nuevo alumno), mandara a editar -->
+		<input type="hidden" th:field="*{id}" />
+		<button type="submit">Guardar</button>
+	
+	
+		
+	
+	</form>
+	
+</body>
+</html>

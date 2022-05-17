@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>ALUMNO LISTADO</h1>
+	
+	<a th:href="@{/carrera/nuevo}">Nueva Carrera</a>
+	
+	<table>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Nombre</th>
+			<th>Descripcion</th>
+			<th>Acciones</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="carrera : ${carreras}">
+			<th th:text="${carrera.id}"></th>
+			<th th:text="${carrera.nombre}"></th>
+			<th th:text="${carrera.descripcion}"></th>
+			<td>	<!-- La primera parte hace referencia al controller y su mapping, la segunda agarra los parametros que enviará  -->
+				<a th:href="@{/carrera/editar/{carreraId}(carreraId=${carrera.id})}">Editar</a>
+				<a th:href="@{/carrera/eliminar(id=${carrera.id})}">Eliminar</a>
+			</td>
+		</tr>
+	</tbody>
+	</table>
+
+</body>
+</html>
